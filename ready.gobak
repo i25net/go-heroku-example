@@ -55,7 +55,7 @@ var (
 
 func main() {
 	http.HandleFunc("/", handler)
-
+	http.HandleFunc("/testhello", testhello)
 	parts := []string{"", "8080"}
 
 	for i, keys := range [][]string{{"VCAP_APP_HOST", "HOST"}, {"VCAP_APP_PORT", "PORT"}} {
@@ -72,6 +72,10 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func testhello(res http.ResponseWriter, req *http.Request) {
+	fmt.Fprintln(res, time.Now())
 }
 
 func ReadRequest(r io.Reader) (req *http.Request, err error) {
@@ -140,7 +144,6 @@ func httpError(rw http.ResponseWriter, err string, code int) {
 }
 
 func handler(rw http.ResponseWriter, req *http.Request) {
-	fmt.Fprintln(time.Now())
 	var err error
 
 	logger := log.New(os.Stdout, "index.go: ", 0)
