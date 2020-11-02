@@ -140,7 +140,7 @@ func httpError(rw http.ResponseWriter, err string, code int) {
 }
 
 func handler(rw http.ResponseWriter, req *http.Request) {
-	fmt.Fprintln(time.Now())
+	fmt.Fprintln("Time is ",time.Now())
 	var err error
 
 	logger := log.New(os.Stdout, "index.go: ", 0)
