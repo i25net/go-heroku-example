@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	http.HandleFunc("/", indexpage)
 	http.HandleFunc("/test", hello)
 	fmt.Println("listening...")
 	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
@@ -18,4 +19,8 @@ func main() {
 
 func hello(res http.ResponseWriter, req *http.Request) {
 	fmt.Fprintln(res, time.Now())
+}
+
+func indexpage(res http.ResponseWriter, req *http.Request) {
+	fmt.Fprintln(res, "hello heroku")
 }
